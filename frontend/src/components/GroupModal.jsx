@@ -20,6 +20,9 @@ import {
 import { UserContext } from "../context/Context";
 import axios from "axios";
 import { DummyUsersLoading, Card, SpinnerLoading } from "../components";
+import { MdOutlineAddCircle } from "react-icons/md";
+import { IoPersonAdd } from "react-icons/io5";
+import { ImCross } from "react-icons/im";
 
 export default function GroupModal({ type }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -158,7 +161,7 @@ export default function GroupModal({ type }) {
   return (
     <Container>
       {type === "create" ? (
-        <img src="assets/icons/add.svg" onClick={onOpen} alt="add-icon" />
+        <MdOutlineAddCircle size={36} cursor="pointer" onClick={onOpen} />
       ) : (
         <MenuItem onClick={onOpen}>Update</MenuItem>
       )}
@@ -168,14 +171,13 @@ export default function GroupModal({ type }) {
           backdropFilter="blur(10px) hue-rotate(90deg)"
         />
         <ModalContent>
-          <ModalHeader display="flex" justifyContent="space-between">
+          <ModalHeader
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
             {type === "create" ? "Create New Group Chat" : "Update"}
-            <img
-              width="17px"
-              src="assets/icons/cross.svg"
-              onClick={onClose}
-              alt="cross-icon"
-            />
+            <ImCross size={20} onClick={onClose} cursor="pointer" />
           </ModalHeader>
           <ModalBody pb={1}>
             <Input
@@ -191,14 +193,7 @@ export default function GroupModal({ type }) {
                 height={8}
                 width={8}
                 pointerEvents="none"
-                children={
-                  <img
-                    width="17px"
-                    id="search-icon"
-                    src="assets/icons/search.svg"
-                    alt="user"
-                  />
-                }
+                children={<IoPersonAdd color="#636c72" />}
               />
               <Input
                 type="text"
@@ -219,13 +214,12 @@ export default function GroupModal({ type }) {
                   margin="5px 5px 0 0"
                 >
                   <TagLabel mr={2}> {user.name}</TagLabel>
-                  <img
-                    width="10px"
-                    src="assets/icons/cross.svg"
-                    alt="cross-icon"
+                  <ImCross
                     onClick={() => {
                       handleRemoveUser(user);
                     }}
+                    size={9}
+                    cursor="pointer"
                   />
                 </Tag>
               ))}

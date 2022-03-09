@@ -11,6 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
 import { UserContext } from "../context/Context";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
+
 
 const initialInputData = {
   name: "",
@@ -130,24 +132,24 @@ export default function Login() {
             />
             <InputRightElement width="4.5rem">
               {showPassword ? (
-                <img
-                  src="assets/icons/open-eye.svg"
-                  alt="open eye"
+                <BsEyeFill
                   onClick={() => {
                     showPassword
                       ? setShowPassword(false)
                       : setShowPassword(true);
                   }}
+                  size={20}
+                  color="#A0AEC0"
                 />
               ) : (
-                <img
-                  src="assets/icons/close-eye.svg"
-                  alt="close eye"
+                <BsEyeSlashFill
                   onClick={() => {
                     showPassword
                       ? setShowPassword(false)
                       : setShowPassword(true);
                   }}
+                  size={20}
+                  color="#A0AEC0"
                 />
               )}
             </InputRightElement>

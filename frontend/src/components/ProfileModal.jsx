@@ -10,6 +10,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { MenuItem, Avatar } from "@chakra-ui/react";
+import { ImCross } from "react-icons/im";
 
 export default function ProfileModal({ user, frontUser }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -23,14 +24,13 @@ export default function ProfileModal({ user, frontUser }) {
           backdropFilter="blur(10px) hue-rotate(90deg)"
         />
         <ModalContent>
-          <ModalHeader display="flex" justifyContent="space-between">
+          <ModalHeader
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+          >
             {user ? "My profile" : "Profile"}
-            <img
-              width="17px"
-              src="assets/icons/cross.svg"
-              onClick={onClose}
-              alt="cross-icon"
-            />
+            <ImCross onClick={onClose} size={20} cursor="pointer" />
           </ModalHeader>
           <ModalBody pb={4}>
             <Avatar

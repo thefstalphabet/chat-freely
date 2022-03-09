@@ -1,5 +1,8 @@
 import React, { useContext, useState } from "react";
 import Styled from "styled-components";
+import { UserContext } from "../context/Context";
+import axios from "axios";
+import { GroupModal, Notifications } from "../components";
 import {
   Menu,
   MenuButton,
@@ -12,15 +15,13 @@ import {
   Avatar,
   Box,
 } from "@chakra-ui/react";
-import { UserContext } from "../context/Context";
 import {
   ProfileModal,
   DummyUsersLoading,
   SpinnerLoading,
   Card,
 } from "../components";
-import axios from "axios";
-import { GroupModal, Notifications } from "../components";
+import { IoPersonAdd } from 'react-icons/io5';
 
 export default function Chats() {
   const toast = useToast();
@@ -111,8 +112,8 @@ export default function Chats() {
       <Header>
         <h2>Chats</h2>
         <Options>
-          <Notifications />
           <GroupModal type="create" />
+          <Notifications />
           <Menu>
             <MenuButton>
               <Avatar size="sm" src={userInfo.avatar} name={userInfo.name} />
@@ -129,7 +130,7 @@ export default function Chats() {
           <InputLeftElement
             pointerEvents="none"
             children={
-              <img id="search-icon" src="assets/icons/search.svg" alt="user" />
+              <IoPersonAdd color="#636c72"/>
             }
           />
           <Input
@@ -203,7 +204,6 @@ export default function Chats() {
 const Container = Styled.div`
   border-right: 1px solid #DCDCDC;
   min-width: 350px;
-  /* height: 100%; */
   @media (max-width: 768px) {
     ${({ value }) => (value.length <= 0 ? "display: block" : "display: none")}
   }
@@ -223,20 +223,13 @@ const Options = Styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 120px;
-  img {
-    cursor: pointer;
-    width: 29px;
-  }
+  width: 130px;
 `;
 const Body = Styled.div`
   padding: 10px;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  #search-icon {
-    width: 17px;
-  }
 `;
 const Listing = Styled.div`
   display: flex;

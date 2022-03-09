@@ -18,6 +18,9 @@ import GroupModal from "./GroupModal";
 import axios from "axios";
 import { YourMsg, SomeoneMsg, TypingIndicator } from "./index";
 import io from "socket.io-client";
+import { HiDotsCircleHorizontal } from "react-icons/hi";
+import { MdArrowBackIosNew } from "react-icons/md";
+import { IoSend } from "react-icons/io5";
 
 // socket stuff
 const URL = "https://chat-freely-app.herokuapp.com";
@@ -225,7 +228,11 @@ export default function Room() {
         !selectedChatCompare ||
         selectedChatCompare._id !== newMessageRecieved.chat._id
       ) {
-        if (!notification.includes(newMessageRecieved)) {
+        if (
+          !notification.find(
+            (noti) => noti.chat._id === newMessageRecieved.chat._id
+          )
+        ) {
           setNotification([newMessageRecieved, ...notification]);
           setFetchAgain(!fetchAgain);
         }
@@ -248,13 +255,20 @@ export default function Room() {
         {selectedChat.length !== 0 ? (
           <>
             <Header>
-              <img
+              {/* <img
                 src="assets/icons/back-arrow.svg"
                 alt="back-arrow"
                 className="back-arrow"
                 onClick={() => {
                   setSelectedChat([]);
+                }} */}
+              <MdArrowBackIosNew
+                size={30}
+                cursor="pointer"
+                onClick={() => {
+                  setSelectedChat([]);
                 }}
+                className="arrow"
               />
               <h2>
                 {selectedChat.isGroupChat
@@ -264,12 +278,7 @@ export default function Room() {
               {selectedChat.isGroupChat ? (
                 <Menu>
                   <MenuButton>
-                    <img
-                      src="assets/icons/menu.svg"
-                      alt="menu"
-                      width="32px"
-                      id="menu-icon"
-                    />
+                    <HiDotsCircleHorizontal size={36} cursor="pointer" />
                   </MenuButton>
                   <MenuList>
                     {selectedChat.groupAdmin._id === userInfo._id && (
@@ -327,11 +336,11 @@ export default function Room() {
                   onChange={handleTyping}
                   value={newMessage}
                 />
-                <img
-                  id="send-icon"
-                  src="assets/icons/send-icon.svg"
-                  alt="send-icon"
+                <IoSend
+                  size={30}
+                  cursor="pointer"
                   onClick={handleSendMessage}
+                  style={{ marginLeft: "10px" }}
                 />
               </form>
             </Body>
@@ -366,17 +375,13 @@ const Header = Styled.div`
         font-size: 20px;
         font-weight: 600;
     }
-    .back-arrow{
+    .arrow{
       display: none;
     }
     @media (max-width: 768px) {
-      .back-arrow{
+      .arrow{
         display: block;
-        cursor: pointer;
       }
-    }
-    #menu-icon{
-      cursor: pointer;
     }
 `;
 const Body = Styled.div`
@@ -388,11 +393,7 @@ const Body = Styled.div`
   gap: 10px;
   form{
     display: flex;
-    #send-icon{
-      width: 37px;
-      margin-left: 10px;
-      cursor: pointer;
-    }
+    align-items: center;
   }
 `;
 const RoomMessages = Styled.div`

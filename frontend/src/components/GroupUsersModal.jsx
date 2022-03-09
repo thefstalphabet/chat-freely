@@ -16,6 +16,7 @@ import React, { useContext, useState } from "react";
 import Styled from "styled-components";
 import { UserContext } from "../context/Context";
 import { SpinnerLoading } from "./index";
+import { ImCross } from "react-icons/im";
 
 export default function UpdateGroupModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -73,14 +74,13 @@ export default function UpdateGroupModal() {
           backdropFilter="blur(10px) hue-rotate(90deg)"
         />
         <ModalContent>
-          <ModalHeader display="flex" justifyContent="space-between">
+          <ModalHeader
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
             Group Members
-            <img
-              width="17px"
-              src="assets/icons/cross.svg"
-              onClick={onClose}
-              alt="cross-icon"
-            />
+            <ImCross size={20} onClick={onClose} cursor="pointer" />
           </ModalHeader>
           <ModalBody pb={7}>
             <Users>
@@ -114,13 +114,12 @@ export default function UpdateGroupModal() {
                   </TagLabel>
                   {selectedChat.groupAdmin._id === userInfo._id &&
                     selectedChat.groupAdmin._id !== user._id && (
-                      <img
-                        width="10px"
-                        src="assets/icons/cross.svg"
-                        alt="cross-icon"
+                      <ImCross
                         onClick={() => {
                           handleRemoveUser(user);
                         }}
+                        size={9}
+                        cursor="pointer"
                       />
                     )}
                 </Tag>
