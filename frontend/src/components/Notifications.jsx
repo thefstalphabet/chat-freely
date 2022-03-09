@@ -3,6 +3,8 @@ import React, { useContext } from "react";
 import Styled from "styled-components";
 import { frontUser } from "../config/chat-logics";
 import { UserContext } from "../context/Context";
+import { MdNotificationsActive } from "react-icons/md";
+import { IoMdNotifications } from "react-icons/io";
 
 export default function Notifications() {
   const { notification, setNotification, userInfo, setSelectedChat } =
@@ -12,9 +14,9 @@ export default function Notifications() {
       <Menu>
         <MenuButton>
           {!notification.length ? (
-            <img src="assets/icons/bell.svg" alt="bell-icon" />
+            <IoMdNotifications size={36} cursor="pointer" />
           ) : (
-            <img src="assets/icons/ringed-bell.svg" alt="ringed-bell-icon" />
+            <MdNotificationsActive size={36} cursor="pointer" />
           )}
         </MenuButton>
         <MenuList>
@@ -30,7 +32,7 @@ export default function Notifications() {
                 }}
               >
                 {ele.chat.isGroupChat
-                  ? `New messaage in ${ele.chat.chatName}`
+                  ? `New message in ${ele.chat.chatName}`
                   : `New message from ${frontUser(userInfo, ele.chat).name}`}
               </MenuItem>
             ))

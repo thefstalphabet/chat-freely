@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import { Register, Enter, Dashboard, Page404, Hero } from "./routes";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { UserContext } from "./context/Context";
+import axios from "axios";
 
 export default function App() {
   const navigate = useNavigate();
@@ -20,7 +20,6 @@ export default function App() {
       const { data } = await axios.get(URL, config);
       setUserInfo(data.user);
     } catch (error) {
-      console.log("You are unauthorized");
       navigate("/login");
     }
   };
@@ -35,9 +34,7 @@ export default function App() {
       const URL = "/api/chat";
       const { data } = await axios.get(URL, config);
       setMyChats(data.results);
-    } catch (error) {
-      console.log("You are unauthorized");
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {

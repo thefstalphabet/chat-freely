@@ -5,7 +5,6 @@ import { UserContext } from "../context/Context";
 
 export default function Dashboard() {
   const { userInfo } = useContext(UserContext);
-  console.log(userInfo)
   return (
     <>
       {userInfo && (
